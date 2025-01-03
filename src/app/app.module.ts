@@ -13,19 +13,30 @@ import { provideHttpClient } from '@angular/common/http';
 
 // IMPORT --------------------------------------------------------------------------------
 import { NzButtonModule } from 'ng-zorro-antd/button';
+import { HeaderComponent } from './components/header/header.component';
+import { TaggingScreenComponent } from './screens/tagging-screen/tagging-screen.component';
+import { DashboardScreenComponent } from './screens/dashboard-screen/dashboard-screen.component';
+import { BaseScreenComponent } from './screens/base-screen/base-screen.component';
+import { NzLayoutModule } from 'ng-zorro-antd/layout';
+
 
 
 registerLocaleData(en);
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    HeaderComponent,
+    TaggingScreenComponent,
+    DashboardScreenComponent,
+    BaseScreenComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    NzButtonModule
+    NzButtonModule,
+    NzLayoutModule
   ],
   providers: [
     provideClientHydration(),
