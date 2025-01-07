@@ -1,0 +1,189 @@
+<div class="tib-bg-light">
+  <!-- filter -->
+  <div class="md:ps-8 md:pe-8 ps-4 pe-4 pt-4 pb-4 flex items-center gap-2">
+    <!-- New annotation button -->
+    <button nz-button nzSize="large" nzShape="circle">
+      <span nz-icon nzType="left"></span>
+    </button>
+
+    <span class="font-semibold text-lg tib-text-dark">New annotation</span>
+  </div>
+
+  <!-- content -->
+  <div
+    class="md:ps-8 md:pe-8 ps-4 pe-4 pt-4 pb-4 grid grid-cols-1 md:grid-cols-12 gap-6"
+  >
+    <!-- left section -->
+    <div class="col-span-12 md:col-span-3 gap-4 flex flex-col">
+      <!-- text -->
+      <span class="font-semibold">Annotation informations</span>
+
+      <!-- creation date -->
+      <div class="gap-1 flex flex-col">
+        <span class="text-sm tib-text-gray">Creation date</span>
+        <nz-date-picker
+          disabled="true"
+          nzSize="large"
+          [(ngModel)]="annotation_date"
+        ></nz-date-picker>
+      </div>
+
+      <!-- status -->
+      <div class="gap-1 flex flex-col">
+        <span class="text-sm tib-text-gray">Status</span>
+        <nz-select ngModel="pending" nzSize="large" [nzDisabled]="true">
+          <nz-option nzLabel="En cours" nzValue="pending"></nz-option>
+        </nz-select>
+      </div>
+
+      <!-- id annotation -->
+      <div class="gap-1 flex flex-col">
+        <span class="text-sm tib-text-gray">ID annotation</span>
+        <nz-input-group nzSize="large" [nzSuffix]="suffixIconSearch">
+          <input
+            [disabled]="true"
+            type="text"
+            nz-input
+            placeholder="ID annotation"
+            [(ngModel)]="id_annotation"
+          />
+        </nz-input-group>
+        <ng-template #suffixIconSearch>
+          <span nz-icon nzType="search"></span>
+        </ng-template>
+      </div>
+    </div>
+
+    <!-- right section -->
+    <div class="col-span-12 md:col-span-9">
+      <!-- steps -->
+      <nz-steps [nzCurrent]="current">
+        <nz-step nzTitle="Input" nzDescription="Load records"> </nz-step>
+        <nz-step
+          nzTitle="Annotation"
+          nzSubtitle="00:00:00"
+          nzDescription="Annotate using GND"
+        ></nz-step>
+        <nz-step
+          nzTitle="Output"
+          nzDescription="Download output file"
+        ></nz-step>
+      </nz-steps>
+
+      <div class="steps-content h-max">
+        <!-- step 1 content -->
+        <div class="{{ current != 0 ? 'hidden' : '' }}">
+          <div class="flex justify-between pt-2">
+            <!-- List management -->
+            <div class="flex md:flex-row flex-col gap-3">
+              <!-- select all checkbox -->
+              <div class="flex items-center">
+                <label nz-checkbox>Select all</label>
+              </div>
+
+              <div class="flex items-center">
+                <span class="font-semibold me-3">With selection</span>
+                <nz-select [ngModel]="'Home'" class="w-52" nzSize="large">
+                  <nz-option
+                    [nzLabel]="'Delete'"
+                    [nzValue]="'delete'"
+                  ></nz-option>
+                </nz-select>
+              </div>
+            </div>
+
+            <!-- New annotation button -->
+            <button
+              nz-button
+              class="flex h-9 items-center rounded-md tib-bg-primary text-white hover:bg-red-900 hover:text-white hover:border-red-900"
+            >
+              <span
+                nz-icon
+                nzType="download"
+                nzTheme="outline"
+                class="me-1"
+              ></span>
+              Import record
+            </button>
+          </div>
+
+          <!-- empty list -->
+          <div
+            *ngIf="record_list.length == 0"
+            class="w-full pt flex items-center justify-center"
+          >
+            <nz-empty [nzNotFoundContent]="contentTpl">
+              <ng-template #contentTpl>
+                <div class="flex flex-col gap-1">
+                  <span class="text-lg font-semibold"> No document found </span>
+
+                  <span class="text-neutral-600"
+                    >Please import to view more updates</span
+                  >
+                </div>
+              </ng-template>
+            </nz-empty>
+
+            <nz-upload
+              nzType="drag"
+              [nzMultiple]="true"
+              nzAction="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+              (nzChange)="handleChange($event)"
+            >
+              <p class="ant-upload-drag-icon">
+                <span nz-icon nzType="inbox" ></span>
+              </p>
+              <p class="ant-upload-text">
+                Click or drag file to this area to upload
+              </p>
+              <p class="ant-upload-hint">
+                Support for a single or bulk upload. Strictly prohibit from
+                uploading company data or other band files
+              </p>
+            </nz-upload>
+          </div>
+
+          <!-- record list -->
+          <div *ngIf="record_list.length > 0"></div>
+        </div>
+
+        <!-- step 2 content -->
+        <div class="{{ current != 1 ? 'hidden' : '' }}">
+          <span>Content 2</span>
+        </div>
+
+        <!-- step 3 content -->
+        <div class="{{ current != 2 ? 'hidden' : '' }}">
+          <span>Content 3</span>
+        </div>
+      </div>
+
+      <!-- step actions -->
+      <div class="steps-action">
+        @if (current > 0) {
+        <button
+          class="step-action-button"
+          nz-button
+          nzType="default"
+          (click)="pre()"
+        >
+          <span>Previous</span>
+        </button>
+        } @if (current < 2) {
+        <button
+          nz-button
+          nzType="default"
+          (click)="next()"
+          [disabled]="current == 0 && record_list.length == 0"
+        >
+          <span>Next</span>
+        </button>
+        } @if (current === 2) {
+        <button nz-button nzType="primary" (click)="done()">
+          <span>Done</span>
+        </button>
+        }
+      </div>
+    </div>
+  </div>
+</div>

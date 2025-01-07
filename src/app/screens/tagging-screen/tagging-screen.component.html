@@ -5,7 +5,7 @@
     <div class="flex md:flex-row flex-col gap-3">
       <!-- select all checkbox -->
       <div class="flex items-center">
-        <label nz-checkbox>Select all</label>
+        <label nz-checkbox>Select all</label> 
       </div>
 
       <div class="flex items-center">
@@ -14,10 +14,11 @@
           <nz-option [nzLabel]="'Delete'" [nzValue]="'delete'"></nz-option>
         </nz-select>
       </div>
-    </div>
+    </div> 
 
     <!-- New annotation button -->
     <button
+    (click)="goToNewAnnotationPage()"
       nz-button
       class="flex h-9 items-center rounded-md tib-bg-primary text-white hover:bg-red-900 hover:text-white hover:border-red-900"
     >

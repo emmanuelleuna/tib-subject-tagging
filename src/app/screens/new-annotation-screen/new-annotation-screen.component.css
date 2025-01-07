@@ -1,0 +1,13 @@
+.steps-content {
+  margin-top: 16px;
+
+  min-height: 250px;
+}
+
+.steps-action {
+  margin-top: 24px;
+}
+
+.step-action-button {
+  margin-right: 16px;
+}

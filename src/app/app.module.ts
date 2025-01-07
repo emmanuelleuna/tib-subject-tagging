@@ -32,7 +32,9 @@ import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
 import { NzEmptyModule } from 'ng-zorro-antd/empty';
 import { AnnotationCardComponent } from './components/annotation-card/annotation-card.component';
 import { NzBadgeModule } from 'ng-zorro-antd/badge';
-
+import { NewAnnotationScreenComponent } from './screens/new-annotation-screen/new-annotation-screen.component';
+import { NzStepsModule } from 'ng-zorro-antd/steps';
+import { NzUploadModule } from 'ng-zorro-antd/upload';
 
 registerLocaleData(en);
 
@@ -47,7 +49,8 @@ registerLocaleData(en);
     LogoComponent,
     ChevronDownComponent,
     MenuComponent,
-    AnnotationCardComponent
+    AnnotationCardComponent,
+    NewAnnotationScreenComponent
   ],
   imports: [
     BrowserModule,
@@ -64,7 +67,9 @@ registerLocaleData(en);
     NzCheckboxModule,
     NzDatePickerModule,
     NzEmptyModule,
-    NzBadgeModule
+    NzBadgeModule,
+    NzStepsModule,
+    NzUploadModule
   ],
   providers: [
     provideClientHydration(),

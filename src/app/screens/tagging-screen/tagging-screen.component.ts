@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Annotation } from '../../models/annotation.interface';
 import { range } from 'rxjs';
 import { DatetimeService } from '../../services/datetime.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-tagging-screen',
@@ -10,7 +11,7 @@ import { DatetimeService } from '../../services/datetime.service';
 })
 export class TaggingScreenComponent {
 
-  constructor(private datetimeService: DatetimeService) {
+  constructor(private datetimeService: DatetimeService, private router: Router) {
 
   }
 
@@ -69,6 +70,9 @@ export class TaggingScreenComponent {
 
   }
 
+  /**
+   * Get all annotations from server
+   */
   getAnnotationList() {
     // code ...
     console.log("--- GET ANNoTATION LIST ---");
@@ -94,6 +98,14 @@ export class TaggingScreenComponent {
     }
 
 
+  }
+
+  /**
+   * Navigate to new annotation page
+   */
+  goToNewAnnotationPage() {
+    // code ...
+    this.router.navigateByUrl('home/tagging/new-annotation')
   }
 
   ngOnInit() {
