@@ -18,10 +18,24 @@ import { TaggingScreenComponent } from './screens/tagging-screen/tagging-screen.
 import { DashboardScreenComponent } from './screens/dashboard-screen/dashboard-screen.component';
 import { BaseScreenComponent } from './screens/base-screen/base-screen.component';
 import { NzLayoutModule } from 'ng-zorro-antd/layout';
-
+import { NzMenuModule } from 'ng-zorro-antd/menu';
+import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
+import { NzIconModule } from 'ng-zorro-antd/icon';
+import { LogoComponent } from './components/illustrations/logo/logo.component';
+import { ChevronDownComponent } from './components/illustrations/chevron-down/chevron-down.component';
+import { MenuComponent } from './components/illustrations/menu/menu.component';
+import { NzDrawerModule } from 'ng-zorro-antd/drawer';
+import { NzInputModule } from 'ng-zorro-antd/input';
+import { NzSelectModule } from 'ng-zorro-antd/select';
+import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
+import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
+import { NzEmptyModule } from 'ng-zorro-antd/empty';
+import { AnnotationCardComponent } from './components/annotation-card/annotation-card.component';
+import { NzBadgeModule } from 'ng-zorro-antd/badge';
 
 
 registerLocaleData(en);
+
 
 @NgModule({
   declarations: [
@@ -29,14 +43,28 @@ registerLocaleData(en);
     HeaderComponent,
     TaggingScreenComponent,
     DashboardScreenComponent,
-    BaseScreenComponent
+    BaseScreenComponent,
+    LogoComponent,
+    ChevronDownComponent,
+    MenuComponent,
+    AnnotationCardComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     NzButtonModule,
-    NzLayoutModule
+    NzLayoutModule,
+    NzMenuModule,
+    NzDropDownModule,
+    NzIconModule,
+    NzDrawerModule,
+    NzInputModule,
+    NzSelectModule,
+    NzCheckboxModule,
+    NzDatePickerModule,
+    NzEmptyModule,
+    NzBadgeModule
   ],
   providers: [
     provideClientHydration(),

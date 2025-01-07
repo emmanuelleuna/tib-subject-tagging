@@ -1,0 +1,10 @@
+.active-routerlink {
+  color: var(--tib_primary_color);
+  font-weight: bold;
+}
+.tib-navbar-item:hover {
+  color: var(--tib_primary_color);
+}
+.tib-search-section{
+  background-color: var(--tib_dark_color);
+}

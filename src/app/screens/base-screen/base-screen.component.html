@@ -1,10 +1,156 @@
 <!-- header ------------------------------------- -->
 
 <!-- nav bar -->
-<nav class="nav">navbar</nav>
+<nav class="nav md:ps-8 md:pe-8 ps-4 pe-4 pt-7 pb-7 justify-between flex">
+  <!-- logo -->
+  <a routerLink="/" class="logo flex items-center">
+    <app-logo class="md:w-auto w-52"></app-logo>
+  </a>
+
+  <!-- menu large screen -->
+  <div class="md:flex gap-8 hidden">
+    <!-- menu -->
+    <ul class="flex gap-5 text-gray-400">
+      <!-- dashboard route trigger -->
+      <li
+        routerLinkActive="active-routerlink"
+        class="tib-navbar-item flex items-center"
+      >
+        <a routerLink="/home/dashboard" class="tib-navbar-item">Dashboard</a>
+      </li>
+
+      <!-- tagging route trigger -->
+      <li
+        routerLinkActive="active-routerlink"
+        class="tib-navbar-item flex items-center"
+      >
+        <a routerLink="/home/tagging" class="tib-navbar-item">Tagging</a>
+      </li>
+    </ul>
+
+    <!-- user -->
+    <div
+      nz-dropdown
+      [nzDropdownMenu]="menu"
+      nzPlacement="bottomLeft"
+      class="flex gap-2 border p-2 rounded text-black hover:text-red-700"
+    >
+      <div class="flex-col flex">
+        <span class="text-md font-medium hover:text-red-700">Username</span>
+        <span class="text-xs text-gray-400">Admin</span>
+      </div>
+
+      <app-chevron-down class="size-4" />
+    </div>
+
+    <!-- user dropdown -->
+    <nz-dropdown-menu #menu="nzDropdownMenu">
+      <ul nz-menu>
+        <li nz-menu-item>
+          <span nz-icon nzType="user" nzTheme="outline" class="me-2"></span>
+          Profile
+        </li>
+        <li nz-menu-item>
+          <span nz-icon nzType="logout" nzTheme="outline" class="me-2"></span
+          >Sign out
+        </li>
+      </ul>
+    </nz-dropdown-menu>
+  </div>
+
+  <!-- menu mobile -->
+  <div class="md:hidden flex">
+    <!-- drawer trigger -->
+    <button
+      nz-button
+      nzSize="large"
+      nzType="default"
+      nzShape="circle"
+      (click)="openDrawer()"
+    >
+      <span nz-icon nzType="menu" nzTheme="outline"></span>
+    </button>
+
+    <nz-drawer
+      [nzClosable]="true"
+      [nzVisible]="isDrawerVisible"
+      [nzWidth]="250"
+      nzPlacement="right"
+      nzTitle="Navigation"
+      (nzOnClose)="closeDrawer()"
+    >
+      <ng-container *nzDrawerContent class="w-20">
+        <!-- Triggers -->
+        <ul class="flex flex-col gap-3 text-gray-400">
+          <!-- dashboard route trigger -->
+          <li
+            routerLinkActive="active-routerlink"
+            class="tib-navbar-item flex items-center"
+          >
+            <a routerLink="/home/dashboard" class="tib-navbar-item"
+              >Dashboard</a
+            >
+          </li>
+
+          <!-- tagging route trigger -->
+          <li
+            routerLinkActive="active-routerlink"
+            class="tib-navbar-item flex items-center"
+          >
+            <a routerLink="/home/tagging" class="tib-navbar-item">Tagging</a>
+          </li>
+        </ul>
+        <!-- user -->
+        <div
+          nz-dropdown
+          [nzDropdownMenu]="menu"
+          nzPlacement="bottomLeft"
+          class="flex gap-2 border p-2 rounded text-black hover:text-red-700 mt-5"
+        >
+          <div class="flex-col flex w-full">
+            <span class="text-md font-medium hover:text-red-700">Username</span>
+            <span class="text-xs text-gray-400">Admin</span>
+          </div>
+
+          <app-chevron-down class="size-4" />
+        </div>
+      </ng-container>
+    </nz-drawer>
+  </div>
+
+  <!-- drawer -->
+</nav>
 
 <!-- search section -->
-<div>search section</div>
+<div
+  class="tib-search-section md:ps-8 md:pe-8 ps-4 pe-4 pt-7 pb-7 grid md:grid-cols-2 grid-cols-1 gap-4"
+>
+  <!-- texts -->
+  <div class="gap-1">
+    <h2 class="text-2xl text-white">TIB Subject Tagging</h2>
+    <span class="tib-text-gray"
+      >For Technical library open - access catalog</span
+    >
+  </div>
+
+  <!-- search bar -->
+  <div class="flex items-center">
+    <nz-input-group nzSize="large" nzSearch [nzAddOnAfter]="suffixIconButton">
+      <input
+        type="text"
+        nz-input
+        nzSize="large"
+        placeholder="Keyword"
+        class="rounded-md"
+      />
+    </nz-input-group>
+    <ng-template #suffixIconButton>
+      <button nz-button nzType="primary" nzSearch class="rounded-md">
+        <span nz-icon nzType="search"></span>
+      </button>
+    </ng-template>
+  </div>
+</div>
 
 <main class="main" id="main">
   <router-outlet></router-outlet>

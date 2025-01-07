@@ -2,3 +2,41 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+:root {
+    --tib_primary_color: #af1414;
+    --tib_light_color: #f1f1f1;
+    --tib_ligh_2_color: #f8f9fa;
+    --tib_dark_color: #2b3c46;
+    --tib_gray_color: #8499a3;
+}
+
+/* TEXT ----------------------------------- */
+.tib-text-dark {
+    color: var(--tib_dark_color);
+}
+
+.tib-text-gray {
+    color: var(--tib_gray_color);
+}
+
+.tib-text-primary {
+    color: var(--tib_primary_color);
+}
+
+/* BG ----------------------------------- */
+.tib-bg-dark {
+    background-color: var(--tib_dark_color);
+}
+
+.tib-bg-gray {
+    background-color: var(--tib_gray_color);
+}
+
+.tib-bg-primary {
+    background-color: var(--tib_primary_color);
+}
+
+.tib-bg-light{
+    background-color: var(--tib_ligh_2_color);
+}
