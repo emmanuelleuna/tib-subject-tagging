@@ -35,6 +35,12 @@ import { NzBadgeModule } from 'ng-zorro-antd/badge';
 import { NewAnnotationScreenComponent } from './screens/new-annotation-screen/new-annotation-screen.component';
 import { NzStepsModule } from 'ng-zorro-antd/steps';
 import { NzUploadModule } from 'ng-zorro-antd/upload';
+import { UploadFileDialogComponent } from './dialogs/upload-file-dialog/upload-file-dialog.component';
+import { NzModalModule } from 'ng-zorro-antd/modal';
+import { NzProgressModule } from 'ng-zorro-antd/progress';
+import { RecordItemComponent } from './components/record-item/record-item.component';
+
+
 
 registerLocaleData(en);
 
@@ -50,7 +56,9 @@ registerLocaleData(en);
     ChevronDownComponent,
     MenuComponent,
     AnnotationCardComponent,
-    NewAnnotationScreenComponent
+    NewAnnotationScreenComponent,
+    UploadFileDialogComponent,
+    RecordItemComponent,
   ],
   imports: [
     BrowserModule,
@@ -69,7 +77,9 @@ registerLocaleData(en);
     NzEmptyModule,
     NzBadgeModule,
     NzStepsModule,
-    NzUploadModule
+    NzUploadModule,
+    NzModalModule,
+    NzProgressModule
   ],
   providers: [
     provideClientHydration(),
