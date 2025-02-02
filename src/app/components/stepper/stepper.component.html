@@ -1,0 +1,37 @@
+<div class="flex flex-col gap-2">
+  <!-- line 1 -->
+  <div class="flex justify-between">
+    <!-- title -->
+    <span
+      class="text-lg {{
+        state == 'In progress' ? 'tib-text-dark font-semibold' : 'tib-text-gray'
+      }}"
+      >{{ title }}</span
+    >
+
+    <!-- icon -->
+    <span
+      nz-icon
+      [nzType]="
+        state == 'Waiting'
+          ? 'clock-circle'
+          : state == 'In progress'
+          ? 'loading'
+          : 'check-circle'
+      "
+      [nzSpin]="state == 'In progress' ? true : false"
+      class="text-2xl {{
+        state == 'Waiting'
+          ? 'tib-text-gray'
+          : state == 'In progress'
+          ? 'text-blue-600'
+          : 'text-green-600'
+      }}"
+    ></span>
+  </div>
+
+  <!-- line 2 -->
+  <div>
+    <nz-progress [nzPercent]="progression" nzStatus="active"></nz-progress>
+  </div>
+</div>

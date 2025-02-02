@@ -39,6 +39,7 @@ import { UploadFileDialogComponent } from './dialogs/upload-file-dialog/upload-f
 import { NzModalModule } from 'ng-zorro-antd/modal';
 import { NzProgressModule } from 'ng-zorro-antd/progress';
 import { RecordItemComponent } from './components/record-item/record-item.component';
+import { StepperComponent } from './components/stepper/stepper.component';
 
 
 
@@ -59,6 +60,7 @@ registerLocaleData(en);
     NewAnnotationScreenComponent,
     UploadFileDialogComponent,
     RecordItemComponent,
+    StepperComponent,
   ],
   imports: [
     BrowserModule,

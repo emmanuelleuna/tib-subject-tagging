@@ -5,6 +5,7 @@ import { NzMessageService } from 'ng-zorro-antd/message';
 import { NzUploadChangeParam } from 'ng-zorro-antd/upload';
 import { NzUploadFile } from 'ng-zorro-antd/upload';
 import { Record } from '../../models/record.interface';
+import { FileService } from '../../services/file.service';
 
 
 @Component({
@@ -15,11 +16,16 @@ import { Record } from '../../models/record.interface';
 export class NewAnnotationScreenComponent {
 
   constructor(
-    private datetimeService: DatetimeService,
+    protected datetimeService: DatetimeService,
     private router: Router,
-    private messageService: NzMessageService
+    private messageService: NzMessageService,
+    private fileService: FileService
   ) {
 
+  }
+
+  backToList(){
+    this.router.navigateByUrl('/home/tagging')
   }
 
   // annotation insformation ----------
@@ -141,5 +147,172 @@ export class NewAnnotationScreenComponent {
     // close modal
     this.isImportModalVisible = false;
   }
+
+  // STEP 2 VARIABLES =========================================
+
+  steppers_name = ['Dataset preparation', 'Model loading', 'Dataset tokenization', 'Annotation']
+  stepper_1_progression = 0
+  stepper_2_progression = 0
+  stepper_3_progression = 0
+  stepper_4_progression = 0
+
+  // Waiting, In progress, Finished
+  stepper_1_state: "Waiting" | "In progress" | "Finished" = "Waiting";
+  stepper_2_state: "Waiting" | "In progress" | "Finished" = "Waiting";
+  stepper_3_state: "Waiting" | "In progress" | "Finished" = "Waiting";
+  stepper_4_state: "Waiting" | "In progress" | "Finished" = "Waiting";
+
+  // Temps d'exécution en secondes
+  time: number = 0;
+  private timeInterval: any; // ID pour l'intervalle
+
+  // STEP 2 FUNCTIONS =========================================
+
+  /**
+   * Prepare dataset for annotation
+   */
+  dataset_preparation() {
+
+  }
+
+  /**
+   * Loading model for annotation
+   */
+  loading_model() {
+
+  }
+
+  /**
+   * Tokenization of dataset
+   */
+  tokenize_dataset() {
+
+  }
+
+  /**
+   * Annotate record
+   */
+  annotate() {
+
+  }
+
+  async start_annotation(): Promise<void> {
+
+    // Réinitialiser le compteur de temps
+    this.time = 0;
+
+    // Démarrer le compteur de temps
+    this.timeInterval = setInterval(() => {
+      this.time += 1;
+    }, 1000); // Incrémente chaque seconde
+
+    const steps = [
+      {
+        name: "Dataset preparation",
+        action: this.dataset_preparation.bind(this),
+        progressionKey: "stepper_1_progression",
+        stateKey: "stepper_1_state",
+      },
+      {
+        name: "Model loading",
+        action: this.loading_model.bind(this),
+        progressionKey: "stepper_2_progression",
+        stateKey: "stepper_2_state",
+      },
+      {
+        name: "Dataset tokenization",
+        action: this.tokenize_dataset.bind(this),
+        progressionKey: "stepper_3_progression",
+        stateKey: "stepper_3_state",
+      },
+      {
+        name: "Annotation",
+        action: this.annotate.bind(this),
+        progressionKey: "stepper_4_progression",
+        stateKey: "stepper_4_state",
+      },
+    ];
+
+    for (const step of steps) {
+      // Start the step
+      console.log(`Starting: ${step.name}`);
+      (this as any)[step.stateKey] = "In progress";
+
+      // Simulate progress
+      await this.simulateProgress(step.progressionKey);
+
+      // Complete the step
+      (this as any)[step.stateKey] = "Finished";
+      step.action();
+      console.log(`Finished: ${step.name}`);
+    }
+
+    // Arrêter le compteur de temps après la fin
+    clearInterval(this.timeInterval);
+    console.log(`Annotation process completed in ${this.time} seconds.`);
+  }
+
+  private simulateProgress(progressionKey: string): Promise<void> {
+    return new Promise((resolve) => {
+      const interval = setInterval(() => {
+        if ((this as any)[progressionKey] < 100) {
+          (this as any)[progressionKey] += 10; // Increment progress by 10%
+          console.log(`${progressionKey}: ${(this as any)[progressionKey]}%`);
+        } else {
+          clearInterval(interval);
+          resolve();
+        }
+      }, 500); // Update progress every 500ms
+    });
+  }
+
+  // STEP 3 VARIABLES =========================================
+  output = [
+    {
+      filename: "xxxxxxx",
+      prediction: [
+        "gnd:xxxxxxx",
+        "gnd:xxxxxxx",
+        "gnd:xxxxxxx",
+        "gnd:xxxxxxx",
+        "gnd:xxxxxxx",
+        "gnd:xxxxxxx",
+        "gnd:xxxxxxx",
+      ]
+    },
+    {
+      filename: "xxxxxxx",
+      prediction: [
+        "gnd:xxxxxxx",
+        "gnd:xxxxxxx",
+        "gnd:xxxxxxx",
+        "gnd:xxxxxxx",
+        "gnd:xxxxxxx",
+        "gnd:xxxxxxx",
+        "gnd:xxxxxxx",
+      ]
+    },
+    {
+      filename: "xxxxxxx",
+      prediction: [
+        "gnd:xxxxxxx",
+        "gnd:xxxxxxx",
+        "gnd:xxxxxxx",
+        "gnd:xxxxxxx",
+        "gnd:xxxxxxx",
+        "gnd:xxxxxxx",
+        "gnd:xxxxxxx",
+      ]
+    }
+  ]
+
+  // STEP 3 FUNCTIONS =========================================
+
+  export_annotation() {
+    let filename = "prediction_" + new Date() + '.json'
+    this.fileService.downloadJson(this.output, filename)
+  }
+
+
 
 }
