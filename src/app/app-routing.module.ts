@@ -7,11 +7,11 @@ import { NewAnnotationScreenComponent } from './screens/new-annotation-screen/ne
 
 const routes: Routes = [
   {
-    path: '', redirectTo: 'home/dashboard', pathMatch: 'full'
+    path: '', redirectTo: 'home/tagging', pathMatch: 'full'
   },
   {
     path: 'home', component: BaseScreenComponent, title: 'TIB Subject Tagging', children: [
-      { path: 'dashboard', component: DashboardScreenComponent },
+      // { path: 'dashboard', component: DashboardScreenComponent },
       { path: 'tagging', component: TaggingScreenComponent },
       { path: 'tagging/new-annotation', component: NewAnnotationScreenComponent }
     ]
